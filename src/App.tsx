@@ -1,21 +1,47 @@
-import { MantineProvider, Slider } from "@mantine/core";
+import { createTheme, MantineProvider } from "@mantine/core";
 import "./App.css";
 import "@mantine/core/styles.css";
-import { Test } from "./components";
+import { Home } from "./screens";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
+  const theme = createTheme({
+    colors: {
+      "mineShaft": [
+        '#f6f6f6',
+        '#e7e7e7',
+        '#d1d1d1',
+        '#b0b0b0',
+        '#888888',
+        '#6d6d6d',
+        '#5d5d5d',
+        '#4f4f4f',
+        '#454545',
+        '#3d3d3d',
+        '#2d2d2d',
+      ],
+      "brightSun": [
+        '#fffbeb',
+        '#fff3c6',
+        '#ffe588',
+        '#ffd149',
+        '#ffbd20',
+        '#f99b07',
+        '#dd7302',
+        '#b75006',
+        '#943c0c',
+        '#7a330d',
+        '#461902',
+      ],
+    }
+  })
   return (
-    <MantineProvider>
-      <h1>Welcome to Mantine!</h1>
-      <Slider
-        color="red"
-        marks={[
-          { value: 20, label: "20%" },
-          { value: 50, label: "50%" },
-          { value: 80, label: "80%" },
-        ]}
-      />
-      <Test/>
+    <MantineProvider theme={theme}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="*" element={<Home />} />
+        </Routes>
+      </BrowserRouter>
     </MantineProvider>
   );
 }
