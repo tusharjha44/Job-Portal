@@ -1,22 +1,25 @@
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom';
 
 const NavLinks = () => {
-    const links = [
-        { name: "Find Jobs", url: "/find-jobs" },
-        { name: "Find Talent", url: "/find-talent" },
-        { name: "Upload Jobs", url: "/upload-jobs" },
-        { name: "About Us", url: "/about-us" },
-    ]
-    const location = useLocation()
-    return (
-        <div className='flex gap-5 text-mine-shaft-500 h-full items-center'>
-            {links.map((link, index) => (
-                <div className={`${location.pathname === `${link.url}` ? 'text-bright-sun-400' : ''} h-full flex items-center`} key={index}>
-                    <Link to={link.url}>{link.name}</Link>
-                </div>
-            ))}
+  const links = [
+    { name: 'Find Jobs', url: '/find-jobs' },
+    { name: 'Find Talent', url: '/find-talents' },
+    { name: 'Job History', url: '/job-history' },
+    { name: 'Post Job', url: '/post-job' },
+    { name: 'Posted Jobs', url: '/posted-jobs' },
+  ];
+  const location = useLocation();
+  return (
+    <div className="flex gap-5 text-mine-shaft-500 h-full items-center">
+      {links.map((link, index) => (
+        <div
+          className={`${location.pathname === `${link.url}` ? 'text-bright-sun-400' : ''} h-full flex items-center`}
+          key={index}>
+          <Link to={link.url}>{link.name}</Link>
         </div>
-    )
-}
+      ))}
+    </div>
+  );
+};
 
-export default NavLinks
+export default NavLinks;
