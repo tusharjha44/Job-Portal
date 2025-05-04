@@ -1,1 +1,2 @@
-export { default as SearchBar } from './SearchBar';
+export { default as Jobs } from './Jobs';
+export { default as JobsCard } from './JobsCard';

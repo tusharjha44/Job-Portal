@@ -1,10 +1,14 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Divider, Text } from '@mantine/core';
-import { IconBookmark, IconClockHour3 } from '@tabler/icons-react';
+import { Button, Divider, Text } from '@mantine/core';
+import {
+  IconBookmark,
+  IconBookmarkFilled,
+  IconCalendarMonth,
+  IconClockHour3,
+} from '@tabler/icons-react';
 
-const JobsCard = (props: any) => {
+const JobHistoryCard = (props: any) => {
   const {
     jobTitle,
     company,
@@ -15,6 +19,10 @@ const JobsCard = (props: any) => {
     package: jobPackage,
     postedDaysAgo,
     description,
+    applied,
+    saved,
+    offered,
+    interviewing,
   } = props;
 
   return (
@@ -33,7 +41,11 @@ const JobsCard = (props: any) => {
             </div>
           </div>
         </div>
-        <IconBookmark className="text-mine-shaft-300 cursor-pointer" />
+        {saved ? (
+          <IconBookmarkFilled className="text-bright-sun-400 cursor-pointer" />
+        ) : (
+          <IconBookmark className="text-mine-shaft-300 cursor-pointer" />
+        )}
       </div>
       <div className="flex gap-2 [&>div]:py-1 [&>div]:px-2 [&>div]:bg-mine-shaft-800 [&>div]:text-bright-sun-400 [&>div]:rounded-lg text-xs">
         <div>{experience}</div>
@@ -47,11 +59,30 @@ const JobsCard = (props: any) => {
       <div className="flex justify-between">
         <div className="font-semibold text-mine-shaft-200">&#8377; {jobPackage}</div>
         <div className="flex gap-1 text-mine-shaft-400 items-center text-xs">
-          <IconClockHour3 className="h-5 w-5" stroke={1.5} /> {postedDaysAgo} days ago
+          <IconClockHour3 className="h-5 w-5" stroke={1.5} />
+          {applied || interviewing ? 'Applied ' : offered ? 'Interviewed ' : 'Posted '}
+          {postedDaysAgo} days ago
         </div>
       </div>
+      {(offered || interviewing) && <Divider size="xs" color="mineShaft.7" />}
+      {offered && (
+        <div className="flex gap-2">
+          <Button color="brightSun.4" variant="outline" fullWidth>
+            Accept
+          </Button>
+          <Button color="brightSun.4" variant="light" fullWidth>
+            Reject
+          </Button>
+        </div>
+      )}
+      {interviewing && (
+        <div className="flex gap-1 text-sm items-center text-mine-shaft-200">
+          <IconCalendarMonth className="text-bright-sun-400 w-5 h-5" stroke={1.5} />
+          Sun, 27 August &bull;<span className="text-mine-shaft-400"> 10:00 AM</span>
+        </div>
+      )}
     </Link>
   );
 };
 
-export default JobsCard;
+export default JobHistoryCard;

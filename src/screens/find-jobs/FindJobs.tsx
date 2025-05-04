@@ -1,15 +1,13 @@
-import React from 'react';
-
+import { SearchBar } from '@/components';
+import { dropdownData } from '@/data';
 import { Divider } from '@mantine/core';
 
-import { SearchBar } from './components';
-import Jobs from './components/Jobs';
+import { Jobs } from './components';
 
 const FindJobs = () => {
   return (
     <div className="min-h-[100vh] bg-mine-shaft-950 font-poppins">
-      <Divider mr="md" size="xs" />
-      <SearchBar />
+      <SearchBar data={dropdownData} />
       <Divider mr="md" size="xs" />
       <Jobs />
     </div>

@@ -25,3 +25,17 @@
   --color-bright-sun-900: #7a330d;
   --color-bright-sun-950: #461902;
 }
+
+@layer base {
+  ul,
+  ol {
+    list-style: revert;
+    font-size: medium;
+  }
+  p {
+    font-size: medium;
+  }
+  li {
+    margin-left: 1em;
+  }
+}

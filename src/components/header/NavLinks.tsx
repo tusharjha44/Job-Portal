@@ -4,9 +4,9 @@ const NavLinks = () => {
   const links = [
     { name: 'Find Jobs', url: '/find-jobs' },
     { name: 'Find Talent', url: '/find-talents' },
-    { name: 'Job History', url: '/job-history' },
     { name: 'Post Job', url: '/post-job' },
     { name: 'Posted Jobs', url: '/posted-jobs' },
+    { name: 'Job History', url: '/job-history' },
   ];
   const location = useLocation();
   return (
