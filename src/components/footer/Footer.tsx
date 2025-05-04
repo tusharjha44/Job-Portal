@@ -1,10 +1,17 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { footerLinks } from '@/data';
 import { Divider } from '@mantine/core';
 import { IconAnchor, IconBrandFacebook, IconBrandInstagram, IconBrandX } from '@tabler/icons-react';
 
 const Footer = () => {
+  const location = useLocation();
+
+  if (location.pathname === '/signup' || location.pathname === '/login') {
+    return null;
+  }
+
   return (
     <div className="pt-20 pb-5 flex gap-5 justify-around bg-mine-shaft-950 font-poppins">
       <div className="w-1/4 flex flex-col gap-4">

@@ -4,4 +4,7 @@ export { default as NavLinks } from './header/NavLinks';
 export { default as MultiSelectInput } from './multiselect-input/MultiSelectInput';
 export { default as Sort } from './sort/Sort';
 export { default as SearchBar } from './search-bar/SearchBar';
-export {default as RichTextEditor} from './rich-text-editor/RichTextEditor';
+export { default as RichTextEditor } from './rich-text-editor/RichTextEditor';
+export { default as Form } from './form/Form';
+export { default as LoginSignupForm } from './login-signup-form/LoginSignupForm';
+export { default as ProfileMenu } from './profile-menu/ProfileMenu';

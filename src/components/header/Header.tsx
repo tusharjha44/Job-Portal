@@ -1,9 +1,19 @@
-import { Avatar, Indicator } from '@mantine/core';
+import { useLocation } from 'react-router-dom';
+
+import { Indicator } from '@mantine/core';
 import { IconAnchor, IconBell, IconSettings } from '@tabler/icons-react';
+
+import ProfileMenu from '../profile-menu/ProfileMenu';
 
 import NavLinks from './NavLinks';
 
 const Header = () => {
+  const location = useLocation();
+
+  if (location.pathname === '/signup' || location.pathname === '/login') {
+    return null;
+  }
+
   return (
     <div className="w-full bg-mine-shaft-950 h-20 text-white flex justify-between items-center px-6 bg-mine-shaft-950 font-poppins">
       <div className="flex gap-1 items-center text-bright-sun-400">
@@ -12,10 +22,7 @@ const Header = () => {
       </div>
       <NavLinks />
       <div className="flex gap-3 items-center">
-        <div className="flex gap-2 items-center">
-          <div>Marshal</div>
-          <Avatar src="avatar.png" alt="it's me" />
-        </div>
+        <ProfileMenu />
         <div className="bg-mine-shaft-900 p-1.5 rounded-full">
           <IconSettings stroke={1.5} />
         </div>
