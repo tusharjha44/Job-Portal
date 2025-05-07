@@ -13,16 +13,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "users")
-public class User {
+public class User
+{
     @Id
-    private String id;
+    private Long id;
     private String name;
     @Indexed(unique = true)
     private String email;
     private String password;
     private AccountType accountType;
 
-    public UserDto toDTO() {
-        return new UserDto(this.id,this.name,this.email,this.password,this.accountType);
+    public UserDto toDTO()
+    {
+        return new UserDto(this.id, this.name, this.email, this.password, this.accountType);
     }
 }
