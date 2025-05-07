@@ -13,7 +13,7 @@ const JobDetails = () => {
           Back
         </Button>
       </Link>
-      <div className='flex gap-5 justify-around'>
+      <div className="flex gap-5 justify-around">
         <JobDescription />
         <RecommendedJobs />
       </div>

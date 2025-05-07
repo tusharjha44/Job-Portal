@@ -7,7 +7,7 @@ import '@mantine/dates/styles.css';
 import '@mantine/tiptap/styles.css';
 
 import './App.css';
-import { Footer, Header, LoginSignupForm } from './components';
+import { Footer, Header, LoginSignupForm, Profile } from './components';
 import {
   ApplyJob,
   CompanyProfile,
@@ -74,6 +74,7 @@ function App() {
             <Route path="/login" element={<LoginSignupForm />} />
             <Route path="/signup" element={<LoginSignupForm />} />
             <Route path="/talent-profile" element={<TalentProfile />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<></>} />
           </Routes>
           <Footer />

@@ -15,7 +15,10 @@ const AboutCompany = () => {
                   {key != 'Specialties'
                     ? companyDetails[key]
                     : companyDetails[key].map((item: string, index: number) => (
-                        <span key={index} className='mr-2'> &bull; {item}</span>
+                        <span key={index} className="mr-2">
+                          {' '}
+                          &bull; {item}
+                        </span>
                       ))}
                 </div>
               )}

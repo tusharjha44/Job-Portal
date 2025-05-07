@@ -1,6 +1,6 @@
 import { IconBriefcase, IconMapPin } from '@tabler/icons-react';
 
-const fields = [
+const profileFields = [
   {
     label: 'Job Title',
     placeholder: 'Enter Job Title',
@@ -51,4 +51,4 @@ const fields = [
     leftSection: IconMapPin,
   },
 ];
-export default fields;
+export default profileFields;

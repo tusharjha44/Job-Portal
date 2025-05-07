@@ -1,8 +1,9 @@
 import { Avatar, Divider, Tabs } from '@mantine/core';
 import { IconMapPin } from '@tabler/icons-react';
+
 import AboutCompany from './AboutCompany';
-import CompanyJobs from './CompanyJobs';
 import CompanyEmployee from './CompanyEmployee';
+import CompanyJobs from './CompanyJobs';
 
 const CompanyDetails = () => {
   return (

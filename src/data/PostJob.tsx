@@ -1,3 +1,5 @@
+import { IconBriefcase } from '@tabler/icons-react';
+
 const fields = [
   {
     label: 'Job Title',
@@ -27,6 +29,7 @@ const fields = [
       'Apple',
       'Spotify',
     ],
+    leftSection: IconBriefcase,
   },
   {
     label: 'Experience',

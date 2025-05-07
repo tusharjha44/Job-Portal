@@ -8,3 +8,4 @@ export { default as RichTextEditor } from './rich-text-editor/RichTextEditor';
 export { default as Form } from './form/Form';
 export { default as LoginSignupForm } from './login-signup-form/LoginSignupForm';
 export { default as ProfileMenu } from './profile-menu/ProfileMenu';
+export { default as Profile } from './profile/Profile';

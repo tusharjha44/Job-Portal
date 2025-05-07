@@ -26,7 +26,7 @@ const CompanyProfileCard = (props: any) => {
 
 const SimilarCompanies = () => {
   return (
-    <div className='w-1/4'>
+    <div className="w-1/4">
       <div className="text-xl font-semibold mb-5">Recommended Talents</div>
       <div className="flex flex-col gap-5 flex-wrap">
         {similar.map((company, index) => (
