@@ -1,20 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { fields, profile } from '@/data';
-import profileFields from '@/data/Profile';
+import { getProfile } from '@/services';
+import { setProfile } from '@/store';
+import { formatDate } from '@/utils';
 import { ActionIcon, Button, Divider, TagsInput, Textarea } from '@mantine/core';
-import {
-  IconBriefcase,
-  IconDeviceFloppy,
-  IconMapPin,
-  IconPencil,
-  IconPlus,
-  IconTrash,
-} from '@tabler/icons-react';
+import { IconDeviceFloppy, IconPencil, IconPlus, IconTrash } from '@tabler/icons-react';
 
 import CertificateInput from './CertificateInput';
 import ExperienceInput from './ExperienceInput';
-import SelectInput from './SelectInput';
+import UserInfo from './UserInfo';
 
 const ExperienceCard = (props: any) => {
   const [isEditable, setIsEditable] = useState(false);
@@ -35,9 +30,9 @@ const ExperienceCard = (props: any) => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="text-sm text-mine-shaft-300">
-        {startDate} – {endDate}
+        <div className="text-sm text-mine-shaft-300">
+          {formatDate(startDate)} – {formatDate(endDate)}
+        </div>
       </div>
       <div className="text-sm text-mine-shaft-300 text-justify">{description}</div>
       {edit && (
@@ -69,7 +64,7 @@ const CertificationsCard = (props: any) => {
       </div>
       <div className="flex items-center gap-2">
         <div className="flex flex-col items-end">
-          <div className="text-sm text-mine-shaft-300">Issued {issueDate}</div>
+          <div className="text-sm text-mine-shaft-300">Issued {formatDate(issueDate)}</div>
           <div className="text-sm text-mine-shaft-300">ID: {certificateId}</div>
         </div>
         {edit && (
@@ -83,21 +78,17 @@ const CertificationsCard = (props: any) => {
 };
 
 const Profile = () => {
-  const {
-    name,
-    role,
-    company,
-    location,
-    about: profileAbout,
-    skills,
-    certifications,
-    experience,
-  } = profile;
+  const user = useSelector((state: any) => state.user);
+  const profile = useSelector((state: any) => state.profile);
+
+  const { about: profileAbout, skills, certifications, experience } = profile;
+
   const [edit, setEdit] = useState([false, false, false, false, false]);
   const [about, setAbout] = useState(profileAbout);
   const [skillsList, setSkillsList] = useState(skills);
   const [addExp, setAddExp] = useState(false);
   const [addCerti, setAddCerti] = useState(false);
+  const dispatch = useDispatch();
 
   const handleEdit = (index: number) => {
     const newEdit = [...edit];
@@ -105,7 +96,22 @@ const Profile = () => {
     setEdit(newEdit);
   };
 
-  const select = profileFields;
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const response = await getProfile(user.id);
+        dispatch(setProfile(response));
+      } catch (err: any) {
+        console.error(err);
+      }
+    };
+    fetchProfile();
+  }, []);
+
+  useEffect(() => {
+    setAbout(profileAbout);
+    setSkillsList(skills);
+  }, [profile]);
 
   return (
     <div className="min-h-[90vh] bg-mine-shaft-950 font-poppins p-4">
@@ -118,42 +124,7 @@ const Profile = () => {
             className="w-48 h-48 rounded-full -bottom-1/3 absolute left-3 border-mine-shaft-950 border-8"
           />
         </div>
-        <div className="px-3 mt-20">
-          <div className="text-3xl font-semibold flex justify-between">
-            {name}
-            <ActionIcon
-              size="lg"
-              variant="subtle"
-              color="brightSun.4"
-              onClick={() => handleEdit(0)}>
-              {edit[0] ? (
-                <IconDeviceFloppy className="h-4/5 w-4/5" />
-              ) : (
-                <IconPencil className="h-4/5 w-4/5" />
-              )}
-            </ActionIcon>
-          </div>
-          {edit[0] ? (
-            <>
-              <div className="flex gap-2 [&>*]:w-1/2">
-                <SelectInput {...select[0]} />
-                <SelectInput {...select[1]} />
-              </div>
-              <SelectInput {...select[2]} />
-            </>
-          ) : (
-            <>
-              <div className="text-xl flex gap-1 items-center">
-                <IconBriefcase className="h-5 w-5" stroke={1.5} />
-                {role} &bull; {company}
-              </div>
-              <div className="text-lg flex gap-1 items-center text-mine-shaft-300">
-                <IconMapPin className="h-5 w-5" stroke={1.5} /> {location}
-              </div>
-            </>
-          )}
-        </div>
-
+        <UserInfo />
         <Divider mx="xs" my="xl" />
         <div className="px-3">
           <div className="text-2xl font-semibold mb-3 flex justify-between">
@@ -207,7 +178,7 @@ const Profile = () => {
             />
           ) : (
             <div className="flex flex-wrap gap-2">
-              {skillsList.map((skill: string, index: number) => (
+              {skillsList?.map((skill: string, index: number) => (
                 <div
                   key={index}
                   className="bg-bright-sun-300 bg-opacity-15 text-sm font-medium rounded-3xl text-mine-shaft-950 px-3 py-1">
@@ -243,7 +214,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            {experience.map((exp: any, index: number) => (
+            {experience?.map((exp: any, index: number) => (
               <ExperienceCard key={index} {...exp} edit={edit[3]} />
             ))}
             {addExp && <ExperienceInput add setIsEditable={setAddExp} />}
@@ -275,7 +246,7 @@ const Profile = () => {
             </div>
           </div>
           <div className="flex flex-col gap-8">
-            {certifications.map((certificate: any, index: number) => (
+            {certifications?.map((certificate: any, index: number) => (
               <CertificationsCard key={index} {...certificate} edit={edit[4]} />
             ))}
             {addCerti && <CertificateInput setIsEditable={setAddCerti} />}

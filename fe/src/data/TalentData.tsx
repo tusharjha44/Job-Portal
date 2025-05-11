@@ -57,6 +57,7 @@ const searchFields = [
     ],
   },
 ];
+
 const talents = [
   {
     name: 'Jarrod Wood',

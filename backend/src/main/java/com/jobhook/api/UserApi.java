@@ -1,7 +1,9 @@
 package com.jobhook.api;
 
 import com.jobhook.dto.LoginDto;
+import com.jobhook.dto.ResponseDto;
 import com.jobhook.dto.UserDto;
+import com.jobhook.entity.OTP;
 import com.jobhook.exception.JobPortalException;
 import com.jobhook.service.UserService;
 import jakarta.validation.Valid;
@@ -38,5 +40,28 @@ public class UserApi
             throws JobPortalException
     {
         return new ResponseEntity<>(userService.loginUser(loginDto), HttpStatus.OK);
+    }
+
+    @PostMapping("/sendOtp")
+    public ResponseEntity<ResponseDto> sendOtp(@RequestBody @Valid OTP otp)
+            throws Exception
+    {
+        userService.sendOtp(otp.getEmail());
+        return new ResponseEntity<>(new ResponseDto("OTP sent successfully!!"), HttpStatus.OK);
+    }
+
+    @PostMapping("/verifyOtp")
+    public ResponseEntity<ResponseDto> verifyOtp(@RequestBody @Valid OTP otp)
+            throws JobPortalException
+    {
+        userService.verifyOtp(otp.getEmail(), otp.getOtpCode());
+        return new ResponseEntity<>(new ResponseDto("OTP has been verified!!!"), HttpStatus.OK);
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<ResponseDto> changePassword(@RequestBody @Valid LoginDto loginDto)
+            throws JobPortalException
+    {
+        return new ResponseEntity<>(userService.changePassword(loginDto), HttpStatus.OK);
     }
 }

@@ -14,7 +14,6 @@ const profileFields = [
       'Content Writer',
       'Customer Support',
     ],
-    value: 'Software Engineer',
     leftSection: IconBriefcase,
   },
   {
@@ -31,7 +30,6 @@ const profileFields = [
       'Apple',
       'Spotify',
     ],
-    value: 'Google',
     leftSection: IconBriefcase,
   },
   {
@@ -47,7 +45,6 @@ const profileFields = [
       'Sydney',
       'Toronto',
     ],
-    value: 'New York, United States',
     leftSection: IconMapPin,
   },
 ];
